@@ -1,0 +1,38 @@
+type Creator{
+	id: ID!
+	name: String!
+	age: Int!
+	email: String!
+	videos: [Video]
+}
+type Video{
+	id: ID!
+	title: String!
+	creator: Creator!
+}
+type Comments{
+	id: ID!
+	text: String!
+	creator: Creator!
+	video: Video!
+}
+
+query{
+	creator(id: ID!): Creator
+	video(id: ID!): Video
+	comments(id: ID!): Comments
+	getCreatorVideos(id: ID!): [Video]
+	getVideoComments(id: ID!): [Comments]
+}
+
+mutation{
+	createCreator(name: String!, age: Int!, email: String!): Creator
+	createVideo(title: String!, creatorId: ID!): Video
+	createComments(text: String!, creatorId: ID!, videoId: ID!): Comments
+	updateCreator(id: ID!, name: String, age: Int, email: String): Creator
+	updateVideo(id: ID!, title: String): Video
+	updateComments(id: ID!, text: String): Comments
+	deleteCreator(id: ID!): Creator
+	deleteVideo(id: ID!): Video
+	deleteComments(id: ID!): Comments
+} 
